@@ -1,3 +1,6 @@
 This very simple Ruby class sends monitoring statistics to a collectd server
-using the collectd UDP protocol. It supports gauges, counters, derive, and
-absolute. It does not (yet) support other types.
+using the collectd UDP protocol. See http://collectd.org/wiki/index.php/Binary_protocol
+It supports gauges, counters, derive, and absolute data types. It does not (yet) support other types.
+
+The Collectd class is entirely passive and relies on being called to send values, it thus functions best
+in a daemon that runs periodically and collects data that can then be pushed to collectd.
