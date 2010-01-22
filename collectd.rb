@@ -43,6 +43,11 @@ class Collectd
       start
     end
   end
+  
+  def force_send
+    flush
+    start
+  end
 
   # Issue time, plugin, plugin_instance, type, and type_instance markers. These are not typically called
   # directly
