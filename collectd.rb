@@ -26,8 +26,7 @@ class Collectd
   # overrunning from one packet to the next)
   def start(time=nil)
     @pkt = Collectd.string(0, @host)
-    @time = time if time
-    @pkt << Collectd.number(1, @time) if @time
+    @pkt << Collectd.number(1, Time.new.to_i)
     @pkt << Collectd.number(7, @interval)
     @plugin = @plugin_instance = @tipe = @tipe_instance = nil
   end
