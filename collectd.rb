@@ -14,10 +14,10 @@ class Collectd
   # The host parameter is the hostname sent to collectd, typically `hostname -f`.strip
   # The use of the interval is unclear, it's simply sent to collectd with every packet...
   def initialize(server, port, host, interval)
-    @sock = UDPSocket.new(Socket::AF_INET)
-    @sock.connect(server, port)
+    @server_address = server
+    @server_port = port
     @interval = interval
-    @host = host
+    @host = host || %x{hostname -s}.strip
     start
   end
 
@@ -33,7 +33,7 @@ class Collectd
   end
   # Send the current packet
   def flush
-    @sock.send(@pkt.to_s, 0) rescue SystemCallError
+    raise "need to be redefined"
   end
   # Check the length of the current packet and flush it if we reach a high-water mark
   def chk
