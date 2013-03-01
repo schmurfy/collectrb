@@ -1,7 +1,7 @@
 
 require 'eventmachine'
 
-module Collectd
+module CollectdProtocol
   class EMServer < Base
     def initialize(server, port = 25826, host = nil, interval = 10)
 

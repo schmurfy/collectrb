@@ -1,5 +1,5 @@
 
-module Collectd
+module CollectdProtocol
   class SocketServer < Base
     def initialize(server, port, host, interval)
       @sock = UDPSocket.new(Socket::AF_INET)

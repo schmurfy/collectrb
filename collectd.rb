@@ -1,4 +1,4 @@
-module Collectd
+module CollectdProtocol
   class Base
     # Encode a string (type 0, null terminated string)
     def self.string(type, str)
