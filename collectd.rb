@@ -26,9 +26,9 @@ module CollectdProtocol
     # the passed time (unix time integer) or the same time as the previous packet (useful when
     # overrunning from one packet to the next)
     def start(time=nil)
-      @pkt = Collectd.string(0, @host)
-      @pkt << Collectd.number(1, Time.new.to_i)
-      @pkt << Collectd.number(7, @interval)
+      @pkt = self.class.string(0, @host)
+      @pkt << self.class.number(1, Time.new.to_i)
+      @pkt << self.class.number(7, @interval)
       @plugin = @plugin_instance = @tipe = @tipe_instance = nil
     end
     # Send the current packet
@@ -51,11 +51,11 @@ module CollectdProtocol
 
     # Issue time, plugin, plugin_instance, type, and type_instance markers. These are not typically called
     # directly
-    def time(t)            @pkt << Collectd.number(1, @time = t)            unless @time == t; end
-    def plugin(p)          @pkt << Collectd.string(2, @plugin = p)          unless @plugin == p; end
-    def plugin_instance(p) @pkt << Collectd.string(3, @plugin_instance = p) unless @plugin_instance == p; end
-    def tipe(p)            @pkt << Collectd.string(4, @tipe = p)            unless @tipe == p; end
-    def tipe_instance(p)   @pkt << Collectd.string(5, @tipe_instance = p)   unless @tipe_instance == p; end
+    def time(t)            @pkt << self.class.number(1, @time = t)            unless @time == t; end
+    def plugin(p)          @pkt << self.class.string(2, @plugin = p)          unless @plugin == p; end
+    def plugin_instance(p) @pkt << self.class.string(3, @plugin_instance = p) unless @plugin_instance == p; end
+    def tipe(p)            @pkt << self.class.string(4, @tipe = p)            unless @tipe == p; end
+    def tipe_instance(p)   @pkt << self.class.string(5, @tipe_instance = p)   unless @tipe_instance == p; end
 
     # Send a data point consisting of one or multiple values. Multiple values are used for RRDs with multiple
     # data series (DS's in RRD terms). An examples of a multi-valued RRDs in the collectd types is disk_write
