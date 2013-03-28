@@ -3,9 +3,9 @@ require 'eventmachine'
 
 module CollectdProtocol
   class EMServer < Base
-    def initialize(server, port = 25826, host = nil, interval = 10)
+    def initialize(server, port = 25826, host = nil, interval = 10, bind_address = "0.0.0.0")
 
-      @sock = EM::open_datagram_socket('0.0.0.0', nil)
+      @sock = EM::open_datagram_socket(bind_address, nil)
       super
     end
     
